@@ -1,0 +1,23 @@
+$boxshadow: #ddd;
+$text-color: #444;
+
+header {
+    width: 100%;
+    height: 70px;
+    box-shadow: 3px 4px 2px $boxshadow;
+    position: fixed;
+    top:0;
+    right:0;
+    left: 200px;
+    display: flex;
+
+    h3 {
+        color: $text-color;
+        float: left;
+        padding-left: 15px;
+    }
+}
+
+
+
+
