@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../styling/ui.scss';
+import '../../../styling/ui.scss';
 
 const button = props => {
     return(

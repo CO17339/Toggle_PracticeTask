@@ -1,22 +1,29 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import Header from '../../components/header/header';
-import Button from '../../components/Button/Button';
+import Button from '../../components/UI/Button/Button';
+//import Modal from '../../components/Modal/Modal';
 
-const project = props => {
+class Project extends Component {
 
-    const createNewProject = () => {
+    state = {
+        clicked: false
+    }
 
+    createNewProject = () => {
+        this.state.clicked = true;
     };
 
-    return (
-        <div>
-            <Header>
-               <h3>Projects</h3>
-                <Button onClick= {createNewProject}> + New Project</Button>
-            </Header>
-        </div>
-    );
+    render() {
+        return (
+            <div>
+                <Header>
+                <h3>Projects</h3>
+                    <Button onClick= {this.createNewProject}> + New Project</Button>
+                </Header>
+            </div>
+        );
+    }
 };
 
-export default project;
+export default Project;

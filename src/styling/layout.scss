@@ -24,11 +24,35 @@ div{
     aside {
         width: 200px;
         float: left;
+        position: fixed;
+        left: 0;
+        top: 0;
     }
 
     main {
         float: left;
         width: calc(100% - 200px);
+
+        header{
+            height: 70px;
+        }
+
+        section {
+            width: 100%;
+            position: fixed;
+            top: 70px;
+            right:0;
+            left: 200px;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            padding: 20px;
+
+            p {
+                border-bottom: 1px solid #eee;
+                padding-bottom: 15px;
+            }
+        }
     }
 }
 

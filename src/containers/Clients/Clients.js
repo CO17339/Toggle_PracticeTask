@@ -1,28 +1,43 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 
-import Header from '../../components/header/header';
-import Button from '../../components/Button/Button';
+import Button from '../../components/UI/Button/Button';
+import AddClient from '../../Forms/AddClient';
+import '../../styling/head.scss';
+import Modal from '../../components/Modal/Modal';
+import SearchClient from './SearchClient';
+import '../../styling/layout.scss';
+import DisplayClient from './DisplayClients';
 
-class Client extends Component {
+const Client = (props) => {
 
-    state = {
-        beingAdded: false
-    }
+    const [beingAdded, updateBeingAdded] = useState(false); 
 
-    addNewClienthandler = props => {
-
+    const addNewClientHandler = () => {
+        updateBeingAdded(true);
     };
-
-    render() {
-        return (
-            <div>
-                <Header>
-                    <h3>Clients</h3>
-                    <Button onClick= {this.addNewClient}> + New Client</Button>
-                </Header>
-            </div>
-        );
+    
+    const removeFormHandler = () => {
+        updateBeingAdded(false);
     }
+    
+    return (
+        <div>
+            <Modal show={beingAdded} modalClosed={removeFormHandler}>
+                <AddClient crossClicked={removeFormHandler} formRemove={removeFormHandler}/> 
+            </Modal>
+            <header>
+                <h3>Clients</h3>
+                <SearchClient className= "Search"/>
+                <Button onClick= {addNewClientHandler}> + New Client</Button>
+            </header>
+            <section>
+                <p>All</p>
+                <hr/>
+                <DisplayClient/>
+            </section>
+        </div>
+    );
+    
     
 };
 

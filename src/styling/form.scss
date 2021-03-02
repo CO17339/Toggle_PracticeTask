@@ -1,0 +1,60 @@
+$btn-color: rgb(240, 112, 208);
+$white: #fff;
+
+.form_div {
+    text-align: center;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    left: 500px;
+    top: 30vh;
+    width: 350px;
+    border-radius: 12px;
+    background-color: $white;
+    height: 180px;
+    box-sizing: border-box;
+
+    h4 {
+        position: relative;
+        left: -90px;
+        margin-top: 0;
+    }
+
+    .crs {
+        height: 18px;
+        width: 18px;
+        position: relative;
+        left: 180px; 
+        padding: 0;
+        margin-top: 10px;
+    }
+    
+    .c_btn {
+        background-color: #f070d0;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 18px;
+        margin: 18px auto;
+        position: fixed;
+        font-size: 14px;
+        top: 280px;
+        width: 300px;
+        left: 525px;
+    }
+
+    .c_name {
+        border: none;
+        padding: 10px 5px;
+        width: 290px;
+        margin: auto;
+    }
+
+    .c_name:focus {
+        border: none;
+        border-radius: 8px;
+        background-color: rgb(251, 253, 253);
+      }
+}
+
+
