@@ -48,9 +48,10 @@ div{
             text-align: left;
             padding: 20px;
 
-            p {
+            .bord_bot {
                 border-bottom: 1px solid #eee;
                 padding-bottom: 15px;
+                margin-bottom: 0;
             }
         }
     }

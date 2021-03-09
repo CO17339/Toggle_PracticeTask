@@ -1,10 +1,10 @@
 import React from 'react';
 import '../../styling/head.scss';
 
-const SearchClient = () => {
+const SearchClient = (props) => {
     return (
-        <input className = "search" type = "text" placeholder="Find Client...">
-
+        <input className = "search" type = "text" placeholder="Find Client..."
+        value={props.inputValue} onChange={props.filterClientsOnChange}>
         </input>
     );
 }

@@ -13,7 +13,8 @@ const Input = props => {
         case('select'):
             inputElement = <select {...props}
             value = {props.value}
-            onChange = {props.onChange}/>
+            onChange = {props.onChange}
+            options = {props.children}/>
             break;
         default:
             inputElement = <input {...props}

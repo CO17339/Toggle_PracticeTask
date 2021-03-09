@@ -12,3 +12,24 @@ button {
     margin-left: 72vw;
     font-size: 14px;
 }
+
+.dis_cli {
+    display: flex;
+}
+
+.p_cli {
+    width: auto;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin: 0px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 4px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+ 

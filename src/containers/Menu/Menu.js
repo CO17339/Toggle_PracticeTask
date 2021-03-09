@@ -6,7 +6,7 @@ import '../../styling/layout.scss';
 const menu = (props) => {
     return(
         <nav>
-            <img src = {logo}/>
+            <img src = {logo} alt = "logo"/>
             <ul>
                 <MenuItem link = '/' exact>Projects</MenuItem>
                 <MenuItem link = '/client'>Clients</MenuItem>

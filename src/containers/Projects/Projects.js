@@ -1,29 +1,70 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
+import axios from '../../axios-data';
 
 import Header from '../../components/header/header';
 import Button from '../../components/UI/Button/Button';
-//import Modal from '../../components/Modal/Modal';
 
-class Project extends Component {
+import AddProject from '../../Forms/AddProject';
+import '../../styling/head.scss';
+import Modal from '../../components/Modal/Modal';
 
-    state = {
-        clicked: false
+
+const Project = () => {
+
+    const [beingAdded, updateBeingAdded] = useState(false);
+    const [projectName, updateProjectName]= useState("");
+    const [clientName, updateClientName] = useState("");
+
+    const onChangeHandler = (event) => {
+        updateProjectName(event.target.value);
     }
 
-    createNewProject = () => {
-        this.state.clicked = true;
+    const onClientChangeHandler = (event) => {
+        updateClientName(event.target.value);
+    }
+
+    const createNewProject = () => {
+        updateBeingAdded(true);
     };
+    
+    const removeFormHandler = () => {
+        updateBeingAdded(false);
+    };  
 
-    render() {
-        return (
-            <div>
-                <Header>
-                <h3>Projects</h3>
-                    <Button onClick= {this.createNewProject}> + New Project</Button>
-                </Header>
-            </div>
-        );
+    const onClickhandler = () => {
+        const post = {
+            project: projectName,
+            client: clientName
+        }        
+        axios.post('./projects.json', post)
+            .then(updateProjectName(""))
+            .then(updateClientName(""))
+            .then(updateBeingAdded(false))
+            .then(res => console.log(res.data))
+            .catch(error => console.log(error.message));
     }
+    
+    const addNewClient = () => {
+        
+    }
+
+    return (
+        <div>
+            <Modal show={beingAdded} modalClosed={removeFormHandler}>
+                <AddProject crossClicked={removeFormHandler}
+                    projectName={projectName}
+                    onChangeHandler={onChangeHandler}
+                    clientName={clientName}
+                    onClientChangeHandler={onClientChangeHandler}
+                    onClickhandler={onClickhandler}
+                    addNewClient = {addNewClient}/> 
+            </Modal>
+            <Header>
+            <h3>Projects</h3>
+                <Button onClick= {createNewProject}> + New Project</Button>
+            </Header>
+        </div>
+    );
 };
 
 export default Project;

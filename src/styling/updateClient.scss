@@ -1,0 +1,13 @@
+.update_div {
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+    height: auto;
+    position: relative;
+    background-color: #eee;
+
+    .delete{
+        color: rgb(197, 19, 19);
+        border: none;
+    }
+}

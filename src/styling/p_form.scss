@@ -1,7 +1,7 @@
 $btn-color: rgb(240, 112, 208);
 $white: #fff;
 
-.form_div {
+.form_pdiv {
     text-align: center;
     position: fixed;
     display: flex;
@@ -11,7 +11,7 @@ $white: #fff;
     width: 350px;
     border-radius: 12px;
     background-color: $white;
-    height: 160px;
+    height: 200px;
     box-sizing: border-box;
 
     input {
@@ -20,7 +20,7 @@ $white: #fff;
 
     h4 {
         position: relative;
-        left: -90px;
+        left: -84px;
         margin-top: 0;
     }
 
@@ -28,7 +28,7 @@ $white: #fff;
         height: 18px;
         width: 18px;
         position: relative;
-        left: 180px; 
+        left: 170px; 
         padding: 0;
         margin-top: 10px;
     }
@@ -39,7 +39,7 @@ $white: #fff;
         border: none;
         border-radius: 8px;
         padding: 10px 18px;
-        margin: 35px auto 0px auto;
+        margin: 70px auto 0px auto;
         position: fixed;
         font-size: 14px;
         top: 280px;
@@ -52,6 +52,7 @@ $white: #fff;
         padding: 10px 5px;
         width: 290px;
         margin: auto;
+        margin-bottom: 5px;
     }
 
     .c_name:focus {
@@ -61,4 +62,15 @@ $white: #fff;
       }
 }
 
+option {
+    color: #666;
+}
+
+.dropdown {
+    height: auto;
+    width: 300px;
+    background-color: blanchedalmond;
+    border-radius: 8px;
+    padding: 12px;
+}
 

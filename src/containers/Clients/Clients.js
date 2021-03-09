@@ -1,16 +1,19 @@
 import React, {useState} from 'react';
+import axios from '../../axios-data';
 
 import Button from '../../components/UI/Button/Button';
 import AddClient from '../../Forms/AddClient';
 import '../../styling/head.scss';
 import Modal from '../../components/Modal/Modal';
-import SearchClient from './SearchClient';
 import '../../styling/layout.scss';
-import DisplayClient from './DisplayClients';
+import DisplayClient from './DisplayClient/DisplayClients';
+import UpdateClients from './UpdateClients';
+import Header from '../../components/header/header';
+import SearchClient from './SearchClient';
 
 const Client = (props) => {
-
-    const [beingAdded, updateBeingAdded] = useState(false); 
+    
+    const [beingAdded, updateBeingAdded] = useState(false); //to display the form
 
     const addNewClientHandler = () => {
         updateBeingAdded(true);
@@ -18,20 +21,48 @@ const Client = (props) => {
     
     const removeFormHandler = () => {
         updateBeingAdded(false);
+    };  
+
+    const [nameValue, updateValue]= useState(""); //name of client
+
+    const onClickhandler = () => {
+        const post = {
+            value: nameValue
+        }        
+        axios.post('./clients.json', post)
+            .then(updateBeingAdded(false))
+            .then(updateValue(""))
+            .then(res => console.log(res.data))
+            .catch(error => console.log(error.message));
     }
+
+    const onChangeHandler = (event) => {
+        updateValue(event.target.value);
+    }
+
+    const [inputValue, updateInputValue] = useState("");
+    const filterClientsOnChange = (event) => {
+        updateInputValue(event.target.value)
+    }
+
+    
     
     return (
         <div>
             <Modal show={beingAdded} modalClosed={removeFormHandler}>
-                <AddClient crossClicked={removeFormHandler} formRemove={removeFormHandler}/> 
+                <AddClient crossClicked={removeFormHandler}
+                    nameValue = {nameValue}
+                    onChangeHandler = {onChangeHandler}
+                    onClickhandler = {onClickhandler}/> 
             </Modal>
-            <header>
+            <Header>
                 <h3>Clients</h3>
-                <SearchClient className= "Search"/>
+                <SearchClient className= "Search" inputValue={inputValue}
+                filterClientsOnChange={filterClientsOnChange}/>
                 <Button onClick= {addNewClientHandler}> + New Client</Button>
-            </header>
+            </Header>
             <section>
-                <p>All</p>
+                <p className="bord_bot">All</p>
                 <hr/>
                 <DisplayClient/>
             </section>
