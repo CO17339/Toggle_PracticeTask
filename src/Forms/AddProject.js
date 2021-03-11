@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from '../axios-data';
 import '../styling/p_form.scss';
 import cross from '../assets/images/cross.jpg';
-import SelectDropDown from '../containers/Projects/SelectDropDown';
+//import SelectDropDown from '../containers/Projects/SelectDropDown';
 
 const AddProject = (props) => {   
 
@@ -23,7 +23,7 @@ const AddProject = (props) => {
 
     const clients_list = list.map(display => {
         return (
-            <option onClick = {props.selectClient} value = {display}>{display}</option>
+            <option className= "option_clients" onClick = {props.selectClient} value = {display}>{display}</option>
         );
     });
 
@@ -34,13 +34,14 @@ const AddProject = (props) => {
                     <img src={cross} onClick={props.crossClicked} className="crs"></img>
                 </h4>
                 <input
-                    className = "c_name" type = "text" 
+                    className = "c_name" type = "text" key = {props.key}
                     value= {props.projectName} placeholder="Project Name..."
                     onChange = {(event) => props.onChangeHandler(event)}/>
                 <select value = {props.clientName} placeholder="No Client..."
                     className = "c_name"
                     onChange = {(event) => props.onClientChangeHandler(event)} >
                         {clients_list}
+                        <option></option>
                    </select>
                         
                 

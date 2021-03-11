@@ -1,7 +1,7 @@
 @import "layout";
 $btn-color: rgb(240, 112, 208);
 
-button {
+.button_trivial {
     background-color: $btn-color;
     color: $white;
     border: none;
@@ -29,6 +29,32 @@ button {
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
+    flex-direction: row;
+}
+
+.p_cli::after {
+    top: 40px;
+}
+
+.delete{
+    color: rgb(197, 19, 19);
+    border: none;
+    cursor: pointer;
+}
+
+.edit {
+    cursor: pointer;
+}
+
+.update_div {
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+    height: auto;
+    position: relative;
+    background-color: #eee;
+    padding: 10px; 
+    width: auto;
 }
 
 

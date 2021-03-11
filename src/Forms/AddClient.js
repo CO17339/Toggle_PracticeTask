@@ -8,10 +8,11 @@ const ClientForm = props =>  {
         <div className="form_div">
             <form>
                 <h4>New Client 
-                    <img src={cross} onClick={props.crossClicked} className="crs"></img>
+                    <img src={cross} onClick={props.crossClicked} 
+                    alt = "" className="crs"></img>
                 </h4>
                 <input
-                    className = "c_name" type = "text" 
+                    className = "c_name" type = "text" key = {props.key}
                     value= {props.nameValue} placeholder="Client Name..."
                     onChange = {(event) => props.onChangeHandler(event)}/>
                 <input type="button"  value="Create"

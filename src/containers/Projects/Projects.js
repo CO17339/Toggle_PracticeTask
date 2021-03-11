@@ -57,7 +57,8 @@ const Project = () => {
                     clientName={clientName}
                     onClientChangeHandler={onClientChangeHandler}
                     onClickhandler={onClickhandler}
-                    addNewClient = {addNewClient}/> 
+                    addNewClient = {addNewClient}
+                    key = {projectName.id}/> 
             </Modal>
             <Header>
             <h3>Projects</h3>

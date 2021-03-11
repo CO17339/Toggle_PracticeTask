@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from '../../axios-data';
 
 import Button from '../../components/UI/Button/Button';
@@ -6,10 +6,11 @@ import AddClient from '../../Forms/AddClient';
 import '../../styling/head.scss';
 import Modal from '../../components/Modal/Modal';
 import '../../styling/layout.scss';
-import DisplayClient from './DisplayClient/DisplayClients';
-import UpdateClients from './UpdateClients';
 import Header from '../../components/header/header';
 import SearchClient from './SearchClient';
+import ClientName from './DisplayClient/ClientName';
+import 'firebase/database';
+
 
 const Client = (props) => {
     
@@ -21,9 +22,9 @@ const Client = (props) => {
     
     const removeFormHandler = () => {
         updateBeingAdded(false);
-    };  
+    };  // forms end
 
-    const [nameValue, updateValue]= useState(""); //name of client
+    const [nameValue, updateValue]= useState(""); //add name of client
 
     const onClickhandler = () => {
         const post = {
@@ -38,14 +39,56 @@ const Client = (props) => {
 
     const onChangeHandler = (event) => {
         updateValue(event.target.value);
-    }
+    } //name of client done
 
+    //finding the client
     const [inputValue, updateInputValue] = useState("");
     const filterClientsOnChange = (event) => {
         updateInputValue(event.target.value)
     }
 
-    
+    const [clients, updateClients] = useState([]);
+    //const [clientStatus, updateClientStatus] = useState(false);
+
+    useEffect(async () => {
+        const result = await axios(
+        'https://togglttrack-default-rtdb.firebaseio.com/clients.json',
+        );
+        updateClients(result.data);
+    }, [onClickhandler]);
+
+    const list = []
+    for(var i in clients){
+        list.push(clients[i].value);
+    }
+
+    const filteringClients = list.filter(clients => {
+        return clients.toLowerCase()
+        .includes(inputValue.toLowerCase());
+    })
+
+    const editClient = () => {
+
+    }
+
+    const deleteClient = (id) => {
+
+        axios.delete(`https://togglttrack-default-rtdb.firebaseio.com/clients${id}.json`)
+        .then(response => {
+        console.log(response);
+        })
+        .catch(err => console.log(err.message));
+    }
+
+    const clients_list = filteringClients.map(display => {
+        return (
+            <ClientName key = {display.id} 
+                name = {display}
+                deleteClient = {deleteClient(display.id)}
+                editClient = {editClient}>
+            </ClientName>
+        );
+    });
     
     return (
         <div>
@@ -53,7 +96,8 @@ const Client = (props) => {
                 <AddClient crossClicked={removeFormHandler}
                     nameValue = {nameValue}
                     onChangeHandler = {onChangeHandler}
-                    onClickhandler = {onClickhandler}/> 
+                    onClickhandler = {onClickhandler}
+                    key = {beingAdded.id}/> 
             </Modal>
             <Header>
                 <h3>Clients</h3>
@@ -64,7 +108,9 @@ const Client = (props) => {
             <section>
                 <p className="bord_bot">All</p>
                 <hr/>
-                <DisplayClient/>
+                <div className="dis_cli">
+                    {clients_list}
+                </div>
             </section>
         </div>
     );
