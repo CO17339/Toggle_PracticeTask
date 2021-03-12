@@ -8,6 +8,7 @@ const AddProject = (props) => {
 
     const [clients, updateClients] = useState([]);
    // const [showDropDown, updateDropDown] = useState(false);
+   // const [clientName, updateClientName] = useState("");
 
     useEffect(async () => {
         const result = await axios(
@@ -30,6 +31,10 @@ const AddProject = (props) => {
         );
     });
 
+    // const onClientChangeHandler = (event) => {
+    //     updateClientName(event.target.value);
+    // }
+
     // const dropDownHandler = () => {
     //     if(showDropDown===true)
     //     updateDropDown(false)
@@ -50,8 +55,8 @@ const AddProject = (props) => {
                     placeholder="Project Name..." onChange = {(event) => props.onChangeHandler(event)}/>
 
                 <select type="text" className = "c_name" key = {clients.id}
-                    onChange = {(event) => props.onClientChangeHandler(event)}
-                    value="">
+                    onChange = {(event) => props.onClientChangeHandler(event)}>
+                        <option>No Client</option>
                         {clients_list}
                     </select>
                         

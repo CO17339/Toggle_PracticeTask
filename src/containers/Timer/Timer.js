@@ -3,6 +3,7 @@ import axios from '../../axios-data';
 import Header from '../../components/header/header';
 import Modal from '../../components/Modal/Modal';
 import AddProject from '../../Forms/AddProject';
+import '../../styling/ui.scss';
 
 const Timer = props => {
 
@@ -85,6 +86,11 @@ const Timer = props => {
         return `${hours} : ${getminutes} : ${seconds}`
     }
 
+    const [ project, updateProject ] = useState("");
+    const onInputChangeHandler = (event) => {
+        updateProject(event.target.value);
+    }
+
     return (
         <div>
             <Modal show={beingAdded} modalClosed={removeFormHandler}>
@@ -98,7 +104,8 @@ const Timer = props => {
                     key = {projectName.id}/> 
             </Modal>
             <Header>
-                <h3>Timer</h3>
+                <input className = "timer_input" value = {project} onChange = {(event) => onInputChangeHandler(event)}
+                placeholder = "What are you working on?"></input>
                 <span className = "timer_project" onClick = {createNewProject} > 
                     <span className = "span_plus"> + </span>Create a Project
                 </span>
@@ -114,12 +121,12 @@ const Timer = props => {
                                 )
                         }
                     </div>
-                    <button className = "timer_reset" onClick = {handleReset} disabled = {!isActive}>Reset</button>
-
-                    
-                    
+                    <button className = "timer_reset" onClick = {handleReset} disabled = {!isActive}>Reset</button>           
                 </div>
             </Header>
+            <section>
+                
+            </section>
         </div>
     );
 };

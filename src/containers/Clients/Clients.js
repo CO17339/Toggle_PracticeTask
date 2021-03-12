@@ -9,8 +9,7 @@ import '../../styling/layout.scss';
 import Header from '../../components/header/header';
 import SearchClient from './SearchClient';
 import ClientName from './DisplayClient/ClientName';
-import 'firebase/database';
-
+import firebase from 'firebase/app';
 
 const Client = (props) => {
     
@@ -33,7 +32,7 @@ const Client = (props) => {
         axios.post('./clients.json', post)
             .then(updateBeingAdded(false))
             .then(updateValue(""))
-         //   .then(res => console.log(res.data))
+            .then(res => console.log(res.data))
             .catch(error => console.log(error.message));
     }
 
@@ -55,34 +54,44 @@ const Client = (props) => {
         'https://togglttrack-default-rtdb.firebaseio.com/clients.json',
         );
         updateClients(result.data);
-    }, [onClickhandler]);
+    },[]);
 
     const list = []
     for(var i in clients){
         list.push(clients[i].value);
     }
 
-    const filteringClients = list.filter(clients => {
-        return clients.toLowerCase()
+    const filteringClients = list.filter(client => {
+        return client.toLowerCase()
         .includes(inputValue.toLowerCase());
-    })
+    })  
 
+    //var tutorialsRef = firebase.database().ref("/clients");
     const editClient = () => {
 
     }
 
-    const deleteClient = (id) => {
+    const deleteClient = (display) => {
 
-        axios.delete(`https://togglttrack-default-rtdb.firebaseio.com/clients${id}.json`)
-        .then(res => console.log(res))
-        .catch(err => console.log(err.message));
+       // return firebase.database().ref('items').child('ITEM_KEY').remove();
+
+      //tutorialsRef.child(key).remove();
+
+        // axios.delete(`https://togglttrack-default-rtdb.firebaseio.com/${display}.json`)
+        // .then(res => console.log("xyz",res))
+        // .catch(err => console.log(err.message));
+
+        // axios.delete("/clients/" + id + ".json")
+        // .then(res => console.log("xyz",res))
+        // .catch(err => console.log(err.message));
+
     }
 
     const clients_list = filteringClients.map(display => {
         return (
             <ClientName key = {display.id} 
                 name = {display}
-                deleteClient = {deleteClient(display.id)}
+                deleteClient = {() => deleteClient()}
                 editClient = {editClient}>
             </ClientName>
         );
@@ -95,7 +104,7 @@ const Client = (props) => {
                     nameValue = {nameValue}
                     onChangeHandler = {onChangeHandler}
                     onClickhandler = {onClickhandler}
-                    key = {beingAdded.id}/> 
+                    key = {nameValue.id}/> 
             </Modal>
             <Header>
                 <h3>Clients</h3>
