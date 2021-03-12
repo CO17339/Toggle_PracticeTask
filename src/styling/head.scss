@@ -36,6 +36,56 @@ header {
         }
     }
 
+    .time {
+        width: auto;
+        position: fixed;
+        left: 1000px;
+        top: 25px;
+    }
+
+    .start {
+        background-color: $btn-color;
+        color: white;
+        border-radius: 50%;
+        border: none;
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        top: 22px;
+        left: 1090px;
+        font-size: 18px;
+        font-weight: bold;
+        position: fixed;
+    }
+
+    .pause {
+        background-color: $btn-color;
+        color: white;
+        border-radius: 50%;
+        border: none;
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        top: 22px;
+        left: 1090px;
+        font-size: 18px;
+        font-weight: bold;
+        position: fixed;
+    }
+
+    .timer_reset {
+        background-color: $btn-color;
+        color: white;
+        border-radius: 8px;
+        border: none;
+        width: auto;
+        height: 35px;
+        text-align: center;
+        top: 22px;
+        left: 1140px;
+        font-size: 16px;
+        position: fixed;
+    }
     
 }
 

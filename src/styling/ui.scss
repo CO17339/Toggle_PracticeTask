@@ -40,21 +40,39 @@ $btn-color: rgb(240, 112, 208);
     color: rgb(197, 19, 19);
     border: none;
     cursor: pointer;
+    padding: 0;
+    margin-block-end: 0em;
+    margin-block-start: 0.5em;
+    width: auto;
 }
 
 .edit {
     cursor: pointer;
+    padding: 0;
+    margin-block-end: 0em;
+    margin-block-start: 0.5em;
+    width: auto;
 }
 
 .update_div {
     display: flex;
     flex-direction: column;
-    border-radius: 6px;
+    border-radius: 10px;
     height: auto;
     position: relative;
-    background-color: #eee;
-    padding: 10px; 
-    width: auto;
+    left: 50px;
+    background-color: #fff;
+    width: 75px;
+    margin: auto;
+    padding-left: 10px;
+    border: 1px solid #fff;
+    box-shadow: 1px 1px 0.5px #eee;
+}
+
+.display_clients {
+    display: flex;
+    width: unset;
+    flex-direction: column;
 }
 
 

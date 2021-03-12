@@ -33,7 +33,7 @@ const Client = (props) => {
         axios.post('./clients.json', post)
             .then(updateBeingAdded(false))
             .then(updateValue(""))
-            .then(res => console.log(res.data))
+         //   .then(res => console.log(res.data))
             .catch(error => console.log(error.message));
     }
 
@@ -74,9 +74,7 @@ const Client = (props) => {
     const deleteClient = (id) => {
 
         axios.delete(`https://togglttrack-default-rtdb.firebaseio.com/clients${id}.json`)
-        .then(response => {
-        console.log(response);
-        })
+        .then(res => console.log(res))
         .catch(err => console.log(err.message));
     }
 

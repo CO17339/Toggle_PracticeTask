@@ -7,6 +7,7 @@ import cross from '../assets/images/cross.jpg';
 const AddProject = (props) => {   
 
     const [clients, updateClients] = useState([]);
+   // const [showDropDown, updateDropDown] = useState(false);
 
     useEffect(async () => {
         const result = await axios(
@@ -18,14 +19,23 @@ const AddProject = (props) => {
     const list = []
     for(var i in clients){
         list.push(clients[i].value);
-        console.log(clients[i].value)
     }
 
     const clients_list = list.map(display => {
         return (
-            <option className= "option_clients" onClick = {props.selectClient} value = {display}>{display}</option>
+            <option className= "option_clients" 
+                onClick = {props.selectClient} 
+                value = {display}>{display}
+            </option>
         );
     });
+
+    // const dropDownHandler = () => {
+    //     if(showDropDown===true)
+    //     updateDropDown(false)
+    //     else
+    //     updateDropDown(true)
+    // }
 
     return(
         <div className="form_pdiv">
@@ -33,18 +43,18 @@ const AddProject = (props) => {
                 <h4>Create New Project
                     <img src={cross} onClick={props.crossClicked} className="crs"></img>
                 </h4>
+
                 <input
-                    className = "c_name" type = "text" key = {props.key}
-                    value= {props.projectName} placeholder="Project Name..."
-                    onChange = {(event) => props.onChangeHandler(event)}/>
-                <select value = {props.clientName} placeholder="No Client..."
-                    className = "c_name"
-                    onChange = {(event) => props.onClientChangeHandler(event)} >
+                    className = "c_name" type = "text" 
+                    key = {clients.id} value= {props.projectName} 
+                    placeholder="Project Name..." onChange = {(event) => props.onChangeHandler(event)}/>
+
+                <select type="text" className = "c_name" key = {clients.id}
+                    onChange = {(event) => props.onClientChangeHandler(event)}
+                    value="">
                         {clients_list}
-                        <option></option>
-                   </select>
+                    </select>
                         
-                
                 <input type="button"  value="Create"
                 className="c_btn" onClick={props.onClickhandler}/>
             </form>

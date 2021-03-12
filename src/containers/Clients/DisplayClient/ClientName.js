@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import ellipsis from '../../../assets/images/ellipsis.png';
 import '../../../styling/ui.scss';
 import UpdateClients from '../UpdateClients';
-import Aux from '../../../hoc/Auxi/Auxi';
 
 
 const ClientName = (props) => {
@@ -15,20 +14,20 @@ const ClientName = (props) => {
     };
 
     if (clientStatus===true){
-        show = <UpdateClients
+        show = <UpdateClients 
         editClient = {props.editClient}
         deleteClient = {props.deleteClient}/>
     }
 
     return(
-        <Aux>
+        <div className = "display_clients">
             <p className = "p_cli">
                 {props.name}
                 <img onClick = {updateClientHandler} src={ellipsis} alt=""/>
                 {props.children}
             </p>
             {show}
-        </Aux>  
+        </div>  
 
         
     );

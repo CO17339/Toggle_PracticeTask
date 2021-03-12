@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import axios from '../../axios-data';
 import Header from '../../components/header/header';
 import Modal from '../../components/Modal/Modal';
@@ -43,42 +43,47 @@ const Timer = props => {
         
     }
 
-    const [timerOn, changeTimerOn] = useState(false);
-    const [timerStart, changeTimerStart] = useState(0);
-    const [timerTime, changeTimerTime] = useState(0);
+//Timer
+    const [timer, setTimer] = useState(0)
+    const [isActive, setIsActive] = useState(false)
+    const [isPaused, setIsPaused] = useState(false)
+    const countRef = useRef(null)
 
-    let timer = 0;
-
-    const [resume, changeResume] = useState(true);
-    let sign = <span className="resume"/>
-    if(resume===false){
-        sign=<span className="pause"/>
+    const handleStart = () => {
+        setIsActive(true)
+        setIsPaused(true)
+        countRef.current = setInterval(() => {
+            setTimer((timer) => timer+1)
+        }, 1000)
     }
 
-    const startTimer = () => {
-        changeTimerOn(true);
-        //changeTimerTime({timerTime: timerTime})
-        changeTimerStart({timerStart: Date.now() - timerTime});
-
-        timer = setInterval(() => {
-            changeTimerTime({timerTime: Date.now() - timerStart})
-        }, 10)
+    const handlePause = () => {
+        clearInterval(countRef.current)
+        setIsPaused(false)
     }
 
-    const stopTimer = () => {
-        changeTimerOn(false);
-        clearInterval(timer);
+    const handleResume = () => {
+        setIsPaused(true)
+        countRef.current = setInterval(() => {
+            setTimer((timer) => timer + 1)
+        }, 1000)
     }
 
-    const resetTimer = () => {
-        changeTimerStart({timerStart: 0});
-        changeTimerTime({timerTime: 0})
-      };
+    const handleReset = () => {
+        clearInterval(countRef.current)
+        setIsActive(false)
+        setIsPaused(false)
+        setTimer(0)
+    }
 
-    //const { timerTime } = this.state;
-    let seconds = ("0" + (Math.floor(timerTime / 1000) % 60)).slice(-2);
-    let minutes = ("0" + (Math.floor(timerTime / 60000) % 60)).slice(-2);
-    let hours = ("0" + Math.floor(timerTime / 3600000)).slice(-2);
+    const displayTime = () => {
+        const seconds = `0${(timer % 60)}`.slice(-2)
+        const minutes = `${Math.floor(timer / 60)}`
+        const getminutes = `0${minutes % 60}`.slice(-2)
+        const hours = `0${Math.floor(timer / 3600)}`.slice(-2)
+
+        return `${hours} : ${getminutes} : ${seconds}`
+    }
 
     return (
         <div>
@@ -98,20 +103,20 @@ const Timer = props => {
                     <span className = "span_plus"> + </span>Create a Project
                 </span>
                 <div>
-                    <span className = "time">{hours}:{minutes}:{seconds}</span>
+                    <span className="time">{displayTime()}</span>
+                    <div className = "timer_buttons">
+                        {
+                            !isActive && !isPaused ? 
+                                <button onClick = {handleStart} className="start">{">"}</button>
+                                : (
+                                    isPaused ? <button onClick = {handlePause} className="pause">ll</button>
+                                    : <button onClick = {handleResume} className="start">{">"}</button>
+                                )
+                        }
+                    </div>
+                    <button className = "timer_reset" onClick = {handleReset} disabled = {!isActive}>Reset</button>
 
-                    {timerOn === false && timerTime === 0 && (
-                    <button onClick={startTimer} className="start">Start</button>
-                    )}
-                    {timerOn === true && (
-                    <button onClick={stopTimer} className="stop">Stop</button>
-                    )}
-                    {timerOn === false && timerTime > 0 && (
-                    <button onClick={startTimer} className="resume">Resume</button>
-                    )}
-                    {timerOn === false && timerTime > 0 && (
-                    <button onClick={resetTimer} className="reset">Reset</button>
-                    )}
+                    
                     
                 </div>
             </Header>

@@ -7,7 +7,7 @@ const menu = (props) => {
     return(
         <nav>
             <img src = {logo} alt = "logo"/>
-            <ul>
+            <ul className="menu_list">
                 <MenuItem link = '/' exact>Projects</MenuItem>
                 <MenuItem link = '/client'>Clients</MenuItem>
                 <MenuItem link = '/timer'>Timer</MenuItem>

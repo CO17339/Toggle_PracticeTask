@@ -11,6 +11,11 @@ nav {
     img {
         width: 130px; 
     }
+
+    .menu_list {
+        list-style-type: none;
+        padding-right: 40px;
+    }
 }
 
 div{
@@ -55,5 +60,15 @@ div{
             }
         }
     }
+}
+
+.menu_item {
+    text-decoration: none;
+    color: white;
+    font-size: 16px; 
+}
+
+.item_list {
+    margin-bottom: 20px;
 }
 

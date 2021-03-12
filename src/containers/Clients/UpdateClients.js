@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../styling/ui.scss';
-import axios from 'axios';
 
 const UpdateClient = (props) => {
 

@@ -40,7 +40,7 @@ const Project = () => {
             .then(updateProjectName(""))
             .then(updateClientName(""))
             .then(updateBeingAdded(false))
-            .then(res => console.log(res.data))
+            //.then(res => console.log(res.data))
             .catch(error => console.log(error.message));
     }
     
