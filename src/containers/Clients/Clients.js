@@ -13,7 +13,8 @@ import firebase from 'firebase/app';
 
 const Client = (props) => {
     
-    const [beingAdded, updateBeingAdded] = useState(false); //to display the form
+//to display the form
+    const [beingAdded, updateBeingAdded] = useState(false); 
 
     const addNewClientHandler = () => {
         updateBeingAdded(true);
@@ -21,9 +22,11 @@ const Client = (props) => {
     
     const removeFormHandler = () => {
         updateBeingAdded(false);
-    };  // forms end
+    }; 
+// forms end
 
-    const [nameValue, updateValue]= useState(""); //add name of client
+//add name of client
+    const [nameValue, updateValue]= useState(""); 
 
     const onClickhandler = () => {
         const post = {
@@ -38,16 +41,16 @@ const Client = (props) => {
 
     const onChangeHandler = (event) => {
         updateValue(event.target.value);
-    } //name of client done
+    } 
+//name of client done
 
-    //finding the client
+//finding the client
     const [inputValue, updateInputValue] = useState("");
     const filterClientsOnChange = (event) => {
         updateInputValue(event.target.value)
     }
 
     const [clients, updateClients] = useState([]);
-    //const [clientStatus, updateClientStatus] = useState(false);
 
     useEffect(async () => {
         const result = await axios(
@@ -65,7 +68,9 @@ const Client = (props) => {
         return client.toLowerCase()
         .includes(inputValue.toLowerCase());
     })  
+//finding clients done
 
+//updating clients on backend
     //var tutorialsRef = firebase.database().ref("/clients");
     const editClient = () => {
 
@@ -87,6 +92,7 @@ const Client = (props) => {
 
     }
 
+// rendering the clients onscreen
     const clients_list = filteringClients.map(display => {
         return (
             <ClientName key = {display.id} 

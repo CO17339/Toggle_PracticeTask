@@ -4,9 +4,13 @@ import Header from '../../components/header/header';
 import Modal from '../../components/Modal/Modal';
 import AddProject from '../../Forms/AddProject';
 import '../../styling/ui.scss';
+import './Timer_table';
+import Timer_table from './Timer_table';
+import Time from './Time';
 
 const Timer = props => {
-
+ 
+    //Adding new Project
     const [beingAdded, updateBeingAdded] = useState(false);
     const [projectName, updateProjectName]= useState("");
     const [clientName, updateClientName] = useState("");
@@ -27,10 +31,14 @@ const Timer = props => {
         updateBeingAdded(false);
     }; 
 
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     const onClickhandler = () => {
         const post = {
             project: projectName,
-            client: clientName
+            client: clientName,
+            date_started: date,
+            time_spent: ""
         }        
         axios.post('./projects.json', post)
             .then(updateProjectName(""))
@@ -40,56 +48,19 @@ const Timer = props => {
             .catch(error => console.log(error.message));
     }
 
-    const addNewClient = () => {
-        
-    }
-
-//Timer
-    const [timer, setTimer] = useState(0)
-    const [isActive, setIsActive] = useState(false)
-    const [isPaused, setIsPaused] = useState(false)
-    const countRef = useRef(null)
-
-    const handleStart = () => {
-        setIsActive(true)
-        setIsPaused(true)
-        countRef.current = setInterval(() => {
-            setTimer((timer) => timer+1)
-        }, 1000)
-    }
-
-    const handlePause = () => {
-        clearInterval(countRef.current)
-        setIsPaused(false)
-    }
-
-    const handleResume = () => {
-        setIsPaused(true)
-        countRef.current = setInterval(() => {
-            setTimer((timer) => timer + 1)
-        }, 1000)
-    }
-
-    const handleReset = () => {
-        clearInterval(countRef.current)
-        setIsActive(false)
-        setIsPaused(false)
-        setTimer(0)
-    }
-
-    const displayTime = () => {
-        const seconds = `0${(timer % 60)}`.slice(-2)
-        const minutes = `${Math.floor(timer / 60)}`
-        const getminutes = `0${minutes % 60}`.slice(-2)
-        const hours = `0${Math.floor(timer / 3600)}`.slice(-2)
-
-        return `${hours} : ${getminutes} : ${seconds}`
-    }
-
+//Project name
     const [ project, updateProject ] = useState("");
     const onInputChangeHandler = (event) => {
         updateProject(event.target.value);
     }
+
+    // Connecting timer to project
+    // if (project==="")
+    //     setIsProject(false)
+    // else
+    //     setIsProject(true)
+
+    
 
     return (
         <div>
@@ -100,32 +71,24 @@ const Timer = props => {
                     clientName={clientName}
                     onClientChangeHandler={onClientChangeHandler}
                     onClickhandler={onClickhandler}
-                    addNewClient = {addNewClient}
                     key = {projectName.id}/> 
             </Modal>
             <Header>
-                <input className = "timer_input" value = {project} onChange = {(event) => onInputChangeHandler(event)}
-                placeholder = "What are you working on?"></input>
+                <input 
+                    className = "timer_input" 
+                    value = {project} 
+                    onChange = {(event) => onInputChangeHandler(event)}
+                    placeholder = "What are you working on?">
+                </input>
+
                 <span className = "timer_project" onClick = {createNewProject} > 
                     <span className = "span_plus"> + </span>Create a Project
                 </span>
-                <div>
-                    <span className="time">{displayTime()}</span>
-                    <div className = "timer_buttons">
-                        {
-                            !isActive && !isPaused ? 
-                                <button onClick = {handleStart} className="start">{">"}</button>
-                                : (
-                                    isPaused ? <button onClick = {handlePause} className="pause">ll</button>
-                                    : <button onClick = {handleResume} className="start">{">"}</button>
-                                )
-                        }
-                    </div>
-                    <button className = "timer_reset" onClick = {handleReset} disabled = {!isActive}>Reset</button>           
-                </div>
+
+                <Time/>
             </Header>
             <section>
-                
+                <Timer_table/>
             </section>
         </div>
     );

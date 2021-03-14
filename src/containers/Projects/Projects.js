@@ -11,6 +11,7 @@ import Modal from '../../components/Modal/Modal';
 
 const Project = () => {
 
+//Adding a project
     const [beingAdded, updateBeingAdded] = useState(false);
     const [projectName, updateProjectName]= useState("");
     const [clientName, updateClientName] = useState("");
@@ -31,10 +32,16 @@ const Project = () => {
         updateBeingAdded(false);
     };  
 
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+    //sending data to firebase
     const onClickhandler = () => {
         const post = {
             project: projectName,
-            client: clientName
+            client: clientName,
+            date_started: date,
+            time_spent: ""
         }        
         axios.post('./projects.json', post)
             .then(updateProjectName(""))
@@ -43,11 +50,8 @@ const Project = () => {
             //.then(res => console.log(res.data))
             .catch(error => console.log(error.message));
     }
+    //data sent to firebase
     
-    const addNewClient = () => {
-        
-    }
-
     return (
         <div>
             <Modal show={beingAdded} modalClosed={removeFormHandler}>
@@ -57,7 +61,6 @@ const Project = () => {
                     clientName={clientName}
                     onClientChangeHandler={onClientChangeHandler}
                     onClickhandler={onClickhandler}
-                    addNewClient = {addNewClient}
                     key = {projectName.id}/> 
             </Modal>
             <Header>
