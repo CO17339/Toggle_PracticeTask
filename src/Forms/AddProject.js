@@ -52,10 +52,10 @@ const AddProject = (props) => {
 
                 <input
                     className = "c_name" type = "text" 
-                    key = {clients.id} value= {props.projectName} 
+                    value= {props.projectName} 
                     placeholder="Project Name..." onChange = {(event) => props.onChangeHandler(event)}/>
 
-                <select type="text" className = "c_name" key = {clients.id}
+                <select type="text" className = "c_name"
                     onChange = {(event) => props.onClientChangeHandler(event)}>
                         <option>No Client</option>
                         {clients_list}

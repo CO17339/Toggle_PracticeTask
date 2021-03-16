@@ -42,7 +42,12 @@ const Project = () => {
             project: projectName,
             client: clientName,
             date_started: date,
-            time_spent: ""
+            time_spent: 0,
+            // seconds: 0,
+            // minutes: 0,
+            // hours: 0,
+            // days: 0,
+            time_spent_display: ""
         }        
         axios.post('./projects.json', post)
             .then(updateProjectName(""))

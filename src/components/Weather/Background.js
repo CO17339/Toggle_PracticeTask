@@ -32,8 +32,6 @@ const Background = (props) => {
         
     // },[]);
 
-   
-
     return (
         <div id = "Background" className={weatherDescription}>
             {props.children}

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from '../../axios-data';
 import '../../styling/table.scss';
 
-const TimerTable = () => {
+const TimerTable = (props) => {
 
     const [displayData, updateDisplayData] = useState([]);
 
@@ -11,7 +11,7 @@ const TimerTable = () => {
         'https://togglttrack-default-rtdb.firebaseio.com/projects.json',
         );
         updateDisplayData(content.data);
-    },[]);
+    },[displayData]);
 
 
     const list = []
@@ -25,7 +25,7 @@ const TimerTable = () => {
                 <td>{display.project}</td>
                 <td>{display.client}</td>
                 <td>{display.date_started}</td>
-                <td>{display.time_spent}</td>
+                <td>{props.time_spent}</td>
             </tr>
         );
     });

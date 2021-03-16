@@ -31,10 +31,21 @@ $btn-color: rgb(240, 112, 208);
     padding-top: 5px;
     padding-bottom: 5px;
     flex-direction: row;
+    height: 20px;
 }
 
 .p_cli::after {
     top: 40px;
+}
+
+.clientsName {
+    border: none;
+    width: auto;
+    cursor: pointer;
+}
+
+.clientsName:focus {
+    outline: none;
 }
 
 .delete{
@@ -94,4 +105,9 @@ $btn-color: rgb(240, 112, 208);
 
 .timer_input:active {
     border: none;
+}
+
+.editClient {
+    width: auto;
+    border-radius: 6px;
 }

@@ -75,24 +75,28 @@ div{
             background-image: url('../assets/images/weather/rain.jpg');
             background-repeat: no-repeat;
             opacity: 90%;
+            background-size: cover;
         }
 
         div.Drizzle{
             background-image: url('../assets/images/weather/drizzle.jpg');
             background-repeat: no-repeat;
             opacity: 90%;
+            background-size: cover;
         }
 
         div.Thunderstorm{
             background-image: url('../assets/images/weather/thunder.jpg');
             background-repeat: no-repeat;
             opacity: 90%;
+            background-size: cover;
         }
 
         div.Mist, div.Smoke, div.Haze, div.Dust, div.Fog, div.Sand, div.Dust, div.Ash, div.Squall, div.Tornado {
             background-image: url('../assets/images/weather/mist.jpg');
             background-repeat: no-repeat;
             opacity: 90%;
+            background-size: cover;
         }
 
         section {

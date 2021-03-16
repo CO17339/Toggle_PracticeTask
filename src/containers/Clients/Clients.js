@@ -11,7 +11,7 @@ import Header from '../../components/header/header';
 import SearchClient from './SearchClient';
 import ClientName from './DisplayClient/ClientName';
 import firebase from 'firebase/app';
-
+import EditClient from './EditClient';
 const Client = (props) => {
     
 //to display the form
@@ -26,6 +26,44 @@ const Client = (props) => {
     }; 
 // forms end
 
+//updating clients on backend
+    var count;
+    var show;
+    const deleteClient = (name) => {
+        for(var i in clients){
+            if(name === clients[i].value){
+                count = i;
+                console.log(count)
+                break;
+            }
+        }
+        axios.delete(`https://togglttrack-default-rtdb.firebaseio.com/clients/`+ count +`.json`)
+        .then(res => console.log("xyz",res))
+        .catch(err => console.log(err.message));
+    }
+
+    const editClient = (name) => {
+        show = true;
+        for(var i in clients){
+            if(name === clients[i].value){
+                count = i;
+                console.log(count)
+                break;
+            }
+        }
+
+        // axios.put(`https://togglttrack-default-rtdb.firebaseio.com/clients/`+ count +`.json`, {
+        //     value: ClientName
+        //  }).then(response => {
+        //     console.log(response);
+        //   })
+        //   .catch(err => {
+        //     console.log(err);
+        //   });
+    }
+    
+
+    
 //add name of client
     const [nameValue, updateValue]= useState(""); 
 
@@ -57,7 +95,8 @@ const Client = (props) => {
         'https://togglttrack-default-rtdb.firebaseio.com/clients.json',
         );
         updateClients(result.data);
-    },[]);
+    },[deleteClient]);
+    //console.log(Object.keys(clients))
 
     const list = []
     for(var i in clients){
@@ -69,29 +108,16 @@ const Client = (props) => {
         .includes(inputValue.toLowerCase());
     })  
 //finding clients done
-
-//updating clients on backend
-    //var tutorialsRef = firebase.database().ref("/clients");
-    const editClient = () => {
-
-    }
-
-    const deleteClient = (display) => {
-
-        axios.delete(`https://togglttrack-default-rtdb.firebaseio.com/clients`, {data: {value: display}})
-        .then(res => console.log("xyz",res))
-        .catch(err => console.log(err.message));
-
-    }
-    var count = -1;
+    
+    
 // rendering the clients onscreen
     const clients_list = filteringClients.map(display => {
         return (
             <ClientName key = {display} 
-                count = {count++}
                 name = {display}
                 deleteClient = {() => deleteClient(display)}
-                editClient = {editClient}>
+                editClient = {() => editClient(display)}
+                show = {show}>
             </ClientName>
         );
     });
