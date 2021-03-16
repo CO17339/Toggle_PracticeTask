@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from '../../axios-data';
+import Background from '../../components/Weather/Background';
 
 import Button from '../../components/UI/Button/Button';
 import AddClient from '../../Forms/AddClient';
@@ -35,7 +36,6 @@ const Client = (props) => {
         axios.post('./clients.json', post)
             .then(updateBeingAdded(false))
             .then(updateValue(""))
-            .then(res => console.log(res.data))
             .catch(error => console.log(error.message));
     }
 
@@ -78,26 +78,19 @@ const Client = (props) => {
 
     const deleteClient = (display) => {
 
-       // return firebase.database().ref('items').child('ITEM_KEY').remove();
-
-      //tutorialsRef.child(key).remove();
-
-        // axios.delete(`https://togglttrack-default-rtdb.firebaseio.com/${display}.json`)
-        // .then(res => console.log("xyz",res))
-        // .catch(err => console.log(err.message));
-
-        // axios.delete("/clients/" + id + ".json")
-        // .then(res => console.log("xyz",res))
-        // .catch(err => console.log(err.message));
+        axios.delete(`https://togglttrack-default-rtdb.firebaseio.com/clients`, {data: {value: display}})
+        .then(res => console.log("xyz",res))
+        .catch(err => console.log(err.message));
 
     }
-
+    var count = -1;
 // rendering the clients onscreen
     const clients_list = filteringClients.map(display => {
         return (
-            <ClientName key = {display.id} 
+            <ClientName key = {display} 
+                count = {count++}
                 name = {display}
-                deleteClient = {() => deleteClient()}
+                deleteClient = {() => deleteClient(display)}
                 editClient = {editClient}>
             </ClientName>
         );
@@ -118,6 +111,7 @@ const Client = (props) => {
                 filterClientsOnChange={filterClientsOnChange}/>
                 <Button onClick= {addNewClientHandler}> + New Client</Button>
             </Header>
+            <Background>
             <section>
                 <p className="bord_bot">All</p>
                 <hr/>
@@ -125,6 +119,7 @@ const Client = (props) => {
                     {clients_list}
                 </div>
             </section>
+            </Background>
         </div>
     );
     

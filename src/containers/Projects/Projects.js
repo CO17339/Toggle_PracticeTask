@@ -7,6 +7,7 @@ import Button from '../../components/UI/Button/Button';
 import AddProject from '../../Forms/AddProject';
 import '../../styling/head.scss';
 import Modal from '../../components/Modal/Modal';
+import Background from '../../components/Weather/Background';
 
 
 const Project = () => {
@@ -67,6 +68,7 @@ const Project = () => {
             <h3>Projects</h3>
                 <Button onClick= {createNewProject}> + New Project</Button>
             </Header>
+            <Background/>
         </div>
     );
 };

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from '../../axios-data';
 import '../../styling/table.scss';
 
-const Timer_table = () => {
+const TimerTable = () => {
 
     const [displayData, updateDisplayData] = useState([]);
 
@@ -21,7 +21,7 @@ const Timer_table = () => {
 
     const info = list.map(display => {
         return (
-            <tr>
+            <tr key = {display.project}>
                 <td>{display.project}</td>
                 <td>{display.client}</td>
                 <td>{display.date_started}</td>
@@ -49,4 +49,4 @@ const Timer_table = () => {
     );
 }
 
-export default Timer_table;
+export default TimerTable;

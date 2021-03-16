@@ -42,6 +42,59 @@ div{
             height: 70px;
         }
 
+        #Background {
+            height: calc(100% - 70px);
+            background-color: #eee;
+            width: 100%;
+            position: fixed;
+            top: 70px;
+            right:0;
+            left: 200px;
+        }
+
+        div.Clear {
+            background-image: url('../assets/images/weather/clear.jpg');
+            background-repeat: no-repeat;
+            opacity: 90%;
+            background-size: cover;
+        }
+        div.Clouds {
+            background-image: url('../assets/images/weather/clouds.jpg');
+            background-repeat: no-repeat;
+            opacity: 90%;
+            background-size: cover;
+        }
+        div.Snow {
+            background-image: url('../assets/images/weather/snow.jpg');
+            background-repeat: no-repeat;
+            opacity: 90%;
+            background-size: cover;
+        }
+
+        div.Rain{
+            background-image: url('../assets/images/weather/rain.jpg');
+            background-repeat: no-repeat;
+            opacity: 90%;
+        }
+
+        div.Drizzle{
+            background-image: url('../assets/images/weather/drizzle.jpg');
+            background-repeat: no-repeat;
+            opacity: 90%;
+        }
+
+        div.Thunderstorm{
+            background-image: url('../assets/images/weather/thunder.jpg');
+            background-repeat: no-repeat;
+            opacity: 90%;
+        }
+
+        div.Mist, div.Smoke, div.Haze, div.Dust, div.Fog, div.Sand, div.Dust, div.Ash, div.Squall, div.Tornado {
+            background-image: url('../assets/images/weather/mist.jpg');
+            background-repeat: no-repeat;
+            opacity: 90%;
+        }
+
         section {
             width: 100%;
             position: fixed;
@@ -71,4 +124,6 @@ div{
 .item_list {
     margin-bottom: 20px;
 }
+
+
 

@@ -25,6 +25,7 @@ const AddProject = (props) => {
     const clients_list = list.map(display => {
         return (
             <option className= "option_clients" 
+                key = {display}
                 onClick = {props.selectClient} 
                 value = {display}>{display}
             </option>
@@ -46,7 +47,7 @@ const AddProject = (props) => {
         <div className="form_pdiv">
             <form>
                 <h4>Create New Project
-                    <img src={cross} onClick={props.crossClicked} className="crs"></img>
+                    <img src={cross} onClick={props.crossClicked} alt = "" className="crs"></img>
                 </h4>
 
                 <input
