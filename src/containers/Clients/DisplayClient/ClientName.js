@@ -30,33 +30,32 @@ const ClientName = (props) => {
     if (isComponentVisible===true){
         show = <UpdateClients 
         editClient = {props.editClient}
-        deleteClient = {props.deleteClient}
-        show = {props.show}/>
+        deleteClient = {props.deleteClient}/>
     }
 
     return(
         
-        // <div ref = {ref} className = "display_clients">
-        //     <span  className = "p_cli">
-        //         <input className = "clientsName" value = {props.name} onChange={props.onNameChangeHandler}/>
-        //             <img onClick = {updateClientHandler} src={ellipsis} alt=""/>
-        //             {props.children} 
-        //     </span>
-            
-        //     {show}
-        // </div>  
-
         <div ref = {ref} className = "display_clients">
-            <p  className = "p_cli">
-                <span id = "changeIt" className = "clientsName">
-                    {props.name}
-                </span>
-                <img onClick = {updateClientHandler} src={ellipsis} alt=""/>
-                {props.children} 
-            </p>
+            <span  className = "p_cli">
+                <input type= "text" className = "clientsName" value = {props.name} onChange={props.onNameChangeHandler}/>
+                    <img onClick = {updateClientHandler} src={ellipsis} alt=""/>
+                    {props.children} 
+            </span>
             
             {show}
         </div>  
+
+        // <div ref = {ref} className = "display_clients">
+        //     <p  className = "p_cli">
+        //         <span id = "changeIt" className = "clientsName">
+        //             {props.name}
+        //         </span>
+        //         <img onClick = {updateClientHandler} src={ellipsis} alt=""/>
+        //         {props.children} 
+        //     </p>
+            
+        //     {show}
+        // </div>  
 
         
     );

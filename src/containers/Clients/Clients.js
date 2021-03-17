@@ -10,8 +10,7 @@ import '../../styling/layout.scss';
 import Header from '../../components/header/header';
 import SearchClient from './SearchClient';
 import ClientName from './DisplayClient/ClientName';
-import firebase from 'firebase/app';
-import EditClient from './EditClient';
+
 const Client = (props) => {
     
 //to display the form
@@ -41,9 +40,11 @@ const Client = (props) => {
         .then(res => console.log("xyz",res))
         .catch(err => console.log(err.message));
     }
-
+    const [newName, updateNewName] = useState("");
+    const onNameChangeHandler = (event) => {
+        updateNewName(event.target.value);
+    }
     const editClient = (name) => {
-        show = true;
         for(var i in clients){
             if(name === clients[i].value){
                 count = i;
@@ -52,14 +53,14 @@ const Client = (props) => {
             }
         }
 
-        // axios.put(`https://togglttrack-default-rtdb.firebaseio.com/clients/`+ count +`.json`, {
-        //     value: ClientName
-        //  }).then(response => {
-        //     console.log(response);
-        //   })
-        //   .catch(err => {
-        //     console.log(err);
-        //   });
+        axios.put(`https://togglttrack-default-rtdb.firebaseio.com/clients/`+ count +`.json`, {
+            value: newName
+         }).then(response => {
+            console.log(response);
+          })
+          .catch(err => {
+            console.log(err);
+          });
     }
     
 
@@ -117,7 +118,7 @@ const Client = (props) => {
                 name = {display}
                 deleteClient = {() => deleteClient(display)}
                 editClient = {() => editClient(display)}
-                show = {show}>
+                onNameChangeHandler = {onNameChangeHandler}>
             </ClientName>
         );
     });

@@ -5,11 +5,9 @@ import Modal from '../../components/Modal/Modal';
 import AddProject from '../../Forms/AddProject';
 import '../../styling/ui.scss';
 import '../../styling/head.scss';
-import TimerTable from './timerTable';
 import Background from '../../components/Weather/Background';
-import ErrorMessage from '../../components/ErrorHandler/timerError';
 import "firebase/database";
-import Firebase from '../../Firebase';
+import '../../styling/table.scss';
 
 const Timer = props => {
 
@@ -67,9 +65,6 @@ const Timer = props => {
             list.push(projectList[i].project);
         }
 
-    const [timeList, updateTimeList] = useState(0)
-
-
 //Time Management
     const [timer, setTimer] = useState(0)
     const [isActive, setIsActive] = useState(false)
@@ -77,12 +72,10 @@ const Timer = props => {
     //const [isProject, setIsProject] = useState(false);
     const countRef = useRef(null)
 
-    var k = -1;
     const handleStart = () => {
         for(var i in projectList){
             if(project === projectList[i].project)
             {
-                k = i;
                 setIsActive(true)
                 setIsPaused(true)
                 countRef.current = setInterval(() => {
@@ -91,7 +84,7 @@ const Timer = props => {
             }
         }   
     }
-
+    const [timerTime, updateTimerTime] = useState(0);
     var count;
     var time_spent_initial;
     const handlePause = () => {
@@ -106,21 +99,29 @@ const Timer = props => {
                 break;
             }
         }
-
-        const seconds = `0${((time_spent_initial + timer) % 60)}`.slice(-2)
-        const minutes = `${Math.floor((time_spent_initial + timer) / 60)}`
+        var act_time;
+        if(timerTime === 0){
+            act_time = timer
+        }
+        else {
+            act_time = timer - timerTime
+        }
+        updateTimerTime(timer);
+        const seconds = `0${((time_spent_initial + act_time) % 60)}`.slice(-2)
+        const minutes = `${Math.floor((time_spent_initial + act_time) / 60)}`
         const getminutes = `0${minutes % 60}`.slice(-2)
-        const hours = `0${Math.floor((time_spent_initial + timer) / 3600)}`.slice(-2)
+        const hours = `0${Math.floor((time_spent_initial + act_time) / 3600)}`.slice(-2)
 
         axios.put(`https://togglttrack-default-rtdb.firebaseio.com/projects/`+ count +`.json`, {
             project: projectList[i].project,
             client: projectList[i].client,
             date_started: projectList[i].date_started,
-            time_spent: time_spent_initial + timer,
+            time_spent: time_spent_initial + act_time,
             time_spent_display: `${hours} : ${getminutes} : ${seconds}`
          }).then(response => {
             console.log(response);
           })
+          .then(act_time = 0)
           .catch(err => {
             console.log(err);
           });
@@ -137,7 +138,8 @@ const Timer = props => {
         clearInterval(countRef.current)
         setIsActive(false)
         setIsPaused(false)
-        setTimer(0)
+        setTimer(0)  
+        updateTimerTime(0);
     }
 
     const displayTime = () => {
@@ -164,8 +166,8 @@ const Timer = props => {
     //Rendering table
 
     const data_list = []
-        for(var i in projectList){
-            data_list.push(projectList[i]);
+        for(var j in projectList){
+            data_list.push(projectList[j]);
         }
 
     const info =  data_list.map(display => {
