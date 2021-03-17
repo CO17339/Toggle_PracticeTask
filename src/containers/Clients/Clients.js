@@ -27,7 +27,6 @@ const Client = (props) => {
 
 //updating clients on backend
     var count;
-    var show;
     const deleteClient = (name) => {
         for(var i in clients){
             if(name === clients[i].value){
@@ -42,6 +41,7 @@ const Client = (props) => {
     }
     const [newName, updateNewName] = useState("");
     const onNameChangeHandler = (event) => {
+        console.log(event.target.value)
         updateNewName(event.target.value);
     }
     const editClient = (name) => {
@@ -53,14 +53,14 @@ const Client = (props) => {
             }
         }
 
-        axios.put(`https://togglttrack-default-rtdb.firebaseio.com/clients/`+ count +`.json`, {
-            value: newName
-         }).then(response => {
-            console.log(response);
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        // axios.put(`https://togglttrack-default-rtdb.firebaseio.com/clients/`+ count +`.json`, {
+        //     value: "Radha"
+        //  }).then(response => {
+        //     console.log(response);
+        //   })
+        //   .catch(err => {
+        //     console.log(err);
+        //   });
     }
     
 

@@ -53,6 +53,17 @@ $white: #fff;
         width: 290px;
         margin: auto;
         margin-bottom: 5px;
+        text-align: left;
+    }
+
+    .cp_name {
+        border: none;
+        padding: 10px 5px;
+        width: 290px;
+        margin: auto;
+        margin-bottom: 5px;
+        text-align: left;
+        font-size: 14px;
     }
 
     .c_name:focus {

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from '../axios-data';
 import '../styling/p_form.scss';
 import cross from '../assets/images/cross.jpg';
-//import SelectDropDown from '../containers/Projects/SelectDropDown';
+import SelectDropDown from '../containers/Projects/SelectDropDown';
 
 const AddProject = (props) => {   
 
@@ -32,6 +32,27 @@ const AddProject = (props) => {
         );
     });
 
+    const selectClient = (name) => {
+        document.getElementById("clientName").innerHTML = name;
+    }
+
+    // const clients_list = list.map(display => {
+    //     return (
+    //         <p className= "option_clients" 
+    //             key = {display}
+    //             onClick = {selectClient(display)}>
+    //             {display}
+    //         </p>
+    //     );
+    // });
+
+
+    const onClickSelectHandler = () => {
+        <SelectDropDown>
+            {clients_list}
+        </SelectDropDown>
+    }
+
     // const onClientChangeHandler = (event) => {
     //     updateClientName(event.target.value);
     // }
@@ -59,7 +80,11 @@ const AddProject = (props) => {
                     onChange = {(event) => props.onClientChangeHandler(event)}>
                         <option>No Client</option>
                         {clients_list}
-                    </select>
+                </select>
+
+                {/* <p id = "clientName" className = "cp_name" onClick = {onClickSelectHandler}>
+                    No Client
+                </p> */}
                         
                 <input type="button"  value="Create"
                 className="c_btn" onClick={props.onClickhandler}/>

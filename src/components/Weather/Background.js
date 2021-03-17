@@ -12,10 +12,10 @@ const Background = (props) => {
     }
 
     useEffect(()=> {
-        fetch('https://api.openweathermap.org/data/2.5/weather?zip=141114,in&appid=f4af180985566b2060c127b014dce442') 
+        fetch(`https://api.openweathermap.org/data/2.5/weather?zip=141114,in&appid=4a5dad8103a34efa4c17c71a17085e69`)
         .then(resp => resp.json())
         .then(res => drawWeather(res))
-        .then(res => console.log(res))
+       // .then(res => drawWeather(res))
         .catch(err => console.log(err.message));
     },[])
 
